@@ -67,7 +67,7 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
         const halfInner = innerWidth / 2;
         const halfLength = definition.holderLength / 2;
 
-        // Base footprint only. Avoid overlapping sketch regions.
+        // Base
         var baseSketch = newSketch(context, id + "baseSketch", {
                 "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
         });
@@ -85,32 +85,40 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
                 "depth" : 3 * millimeter
         });
 
-        const baseBody = qCreatedBy(id + "baseExtrude", EntityType.BODY);
-
-        // Two side walls create a U-shaped cradle for the motor.
-        var railsSketch = newSketch(context, id + "railsSketch", {
+        // Left wall as independent body
+        var leftSketch = newSketch(context, id + "leftSketch", {
                 "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
         });
 
-        skRectangle(railsSketch, "leftRail", {
+        skRectangle(leftSketch, "leftRail", {
                 "firstCorner" : vector(-halfOuter, -halfLength),
                 "secondCorner" : vector(-halfInner, halfLength)
         });
 
-        skRectangle(railsSketch, "rightRail", {
+        skSolve(leftSketch);
+
+        extrude(context, id + "leftExtrude", {
+                "entities" : qSketchRegion(id + "leftSketch"),
+                "endBound" : BoundingType.BLIND,
+                "depth" : definition.motorHeight + definition.wallThickness
+        });
+
+        // Right wall as independent body
+        var rightSketch = newSketch(context, id + "rightSketch", {
+                "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
+        });
+
+        skRectangle(rightSketch, "rightRail", {
                 "firstCorner" : vector(halfInner, -halfLength),
                 "secondCorner" : vector(halfOuter, halfLength)
         });
 
-        skSolve(railsSketch);
+        skSolve(rightSketch);
 
-        extrude(context, id + "railsExtrude", {
-                "entities" : qSketchRegion(id + "railsSketch"),
+        extrude(context, id + "rightExtrude", {
+                "entities" : qSketchRegion(id + "rightSketch"),
                 "endBound" : BoundingType.BLIND,
-                "depth" : definition.motorHeight + definition.wallThickness,
-                "operationType" : NewBodyOperationType.ADD,
-                "defaultScope" : false,
-                "booleanScope" : baseBody
+                "depth" : definition.motorHeight + definition.wallThickness
         });
     },
     {
