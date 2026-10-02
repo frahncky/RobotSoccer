@@ -112,13 +112,6 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
                 "defaultScope" : false,
                 "booleanScope" : baseBody
         });
-
-        // Rename the resulting joined body using the original base query.
-        setProperty(context, {
-                "entities" : baseBody,
-                "propertyType" : PropertyType.NAME,
-                "value" : "Suporte_Motor_N20_RobotSoccer"
-        });
     },
     {
         "motorWidth" : 12 * millimeter,
