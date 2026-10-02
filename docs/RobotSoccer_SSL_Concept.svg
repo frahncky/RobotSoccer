@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920">
+<defs><style>
+.t{font-family:Arial,sans-serif;fill:#1f2937}.h{font-size:34px;font-weight:700}.s{font-size:20px}.l{font-size:17px}.b{font-weight:700}.panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.robot{fill:#20252b;stroke:#111827;stroke-width:4}.wheel{fill:#2b3036;stroke:#111827;stroke-width:4}.roller{fill:#9ca3af}.metal{fill:#cbd5e1;stroke:#64748b;stroke-width:3}.pcb{fill:#15803d;stroke:#14532d;stroke-width:3}.battery{fill:#2563eb;stroke:#1e3a8a;stroke-width:3}.call{stroke:#0f172a;stroke-width:2;fill:none;marker-end:url(#a)}
+</style><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#0f172a"/></marker></defs>
+<rect width="1400" height="920" fill="white"/>
+<text x="50" y="58" class="t h">RobotSoccer — conceito de arquitetura SSL</text>
+<text x="50" y="90" class="t s">Referência dimensional e funcional para evolução do CAD — não é ainda o desenho de fabricação.</text>
+<rect x="45" y="125" width="810" height="690" rx="18" class="panel"/>
+<text x="70" y="165" class="t s b">Vista superior — tampa removida</text>
+<circle cx="450" cy="480" r="270" class="robot"/>
+<g transform="translate(450 215)"><circle r="66" class="wheel"/><g class="roller"><ellipse rx="16" ry="33" transform="rotate(0) translate(0 -39)"/><ellipse rx="16" ry="33" transform="rotate(45) translate(0 -39)"/><ellipse rx="16" ry="33" transform="rotate(90) translate(0 -39)"/><ellipse rx="16" ry="33" transform="rotate(135) translate(0 -39)"/></g></g>
+<g transform="translate(235 530)"><circle r="66" class="wheel"/></g><g transform="translate(665 530)"><circle r="66" class="wheel"/></g><g transform="translate(450 725)"><circle r="66" class="wheel"/></g>
+<rect x="365" y="690" width="170" height="34" rx="17" fill="#111827"/><circle cx="450" cy="775" r="42" fill="#f97316" stroke="#c2410c" stroke-width="4"/>
+<circle cx="385" cy="706" r="8" fill="#ef4444"/><circle cx="515" cy="706" r="8" fill="#ef4444"/><rect x="408" y="620" width="84" height="54" class="metal"/>
+<rect x="380" y="430" width="140" height="92" rx="10" class="battery"/><text x="450" y="473" text-anchor="middle" fill="white" font-family="Arial" font-size="18" font-weight="700">LiPo</text><text x="450" y="495" text-anchor="middle" fill="white" font-family="Arial" font-size="15">a definir</text>
+<rect x="365" y="325" width="170" height="70" rx="8" class="pcb"/><text x="450" y="353" text-anchor="middle" fill="white" font-family="Arial" font-size="17" font-weight="700">Controlador</text><text x="450" y="376" text-anchor="middle" fill="white" font-family="Arial" font-size="15">ESP32-S3 / futura PCB</text>
+<rect x="290" y="380" width="62" height="100" rx="6" class="pcb"/><rect x="548" y="380" width="62" height="100" rx="6" class="pcb"/>
+<text x="450" y="585" text-anchor="middle" class="t l">Módulo de chute imediatamente atrás do driblador</text>
+<path d="M740 205 L545 265" class="call"/><text x="745" y="195" class="t l b">4 rodas omni</text><text x="745" y="218" class="t l">≈ 54–60 mm</text>
+<path d="M735 330 L530 355" class="call"/><text x="740" y="320" class="t l b">Controlador embarcado</text><text x="740" y="343" class="t l">ESP32-S3 como referência inicial</text>
+<path d="M735 605 L505 645" class="call"/><text x="740" y="595" class="t l b">Chute</text><text x="740" y="618" class="t l">solenoide + capacitor / arquitetura a definir</text>
+<path d="M705 760 L535 715" class="call"/><text x="710" y="750" class="t l b">Driblador + sensor IR</text><text x="710" y="773" class="t l">confirma posse local da bola</text>
+<rect x="890" y="125" width="465" height="330" rx="18" class="panel"/><text x="915" y="165" class="t s b">Arquitetura de percepção e controle</text>
+<rect x="930" y="205" width="150" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="1005" y="235" text-anchor="middle" class="t l b">SSL-Vision</text><text x="1005" y="258" text-anchor="middle" class="t l">bola + robôs</text>
+<path d="M1080 240 L1170 240" class="call"/><rect x="1175" y="205" width="140" height="70" rx="10" fill="#e2e8f0" stroke="#475569" stroke-width="3"/><text x="1245" y="235" text-anchor="middle" class="t l b">PC da equipe</text><text x="1245" y="258" text-anchor="middle" class="t l">estratégia</text>
+<path d="M1245 275 L1245 335" class="call"/><rect x="1130" y="340" width="230" height="72" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/><text x="1245" y="370" text-anchor="middle" class="t l b">Rádio → robô</text><text x="1245" y="395" text-anchor="middle" class="t l">comandos de velocidade/chute</text>
+<text x="915" y="305" class="t l">No robô: sensor IR confirma a posse</text><text x="915" y="330" class="t l">mesmo quando a visão global não basta.</text>
+<rect x="890" y="485" width="465" height="330" rx="18" class="panel"/><text x="915" y="525" class="t s b">Componentes de referência</text>
+<text x="920" y="565" class="t l b">Tração</text><text x="920" y="590" class="t l">• 4 motores BLDC + encoder (modelo final a definir)</text><text x="920" y="615" class="t l">• 4 rodas omni ≈ 54–60 mm</text><text x="920" y="640" class="t l">• Drivers BLDC compatíveis com o motor escolhido</text>
+<text x="920" y="680" class="t l b">Manipulação da bola</text><text x="920" y="705" class="t l">• Driblador frontal motorizado</text><text x="920" y="730" class="t l">• Sensor IR emissor/receptor</text><text x="920" y="755" class="t l">• Chutador eletromagnético + banco de capacitores</text>
+<text x="920" y="795" class="t l b">Eletrônica</text><text x="1060" y="795" class="t l">ESP32-S3 como referência; PCB final depois.</text>
+<text x="50" y="865" class="t l">Notas: geometria final será limitada pelas regras SSL e pelos componentes selecionados. Referências reais de equipes SSL usam motores Maxon EC 45 flat 50 W, rodas ~54–57 mm e drivers BLDC dedicados/customizados.</text>
+</svg>
