@@ -9,14 +9,6 @@ export const MOTOR_WIDTH_BOUNDS =
     (inch)       : 0.4724
 } as LengthBoundSpec;
 
-export const MOTOR_HEIGHT_BOUNDS =
-{
-    (meter)      : [0.008, 0.010, 0.025],
-    (centimeter) : 1.0,
-    (millimeter) : 10,
-    (inch)       : 0.3937
-} as LengthBoundSpec;
-
 export const HOLDER_LENGTH_BOUNDS =
 {
     (meter)      : [0.012, 0.022, 0.060],
@@ -41,15 +33,20 @@ export const CLEARANCE_BOUNDS =
     (inch)       : 0.0157
 } as LengthBoundSpec;
 
+export const HOLDER_HEIGHT_BOUNDS =
+{
+    (meter)      : [0.006, 0.013, 0.030],
+    (centimeter) : 1.3,
+    (millimeter) : 13,
+    (inch)       : 0.5118
+} as LengthBoundSpec;
+
 annotation { "Feature Type Name" : "RobotSoccer N20 Motor Holder" }
 export const robotSoccerN20Holder = defineFeature(function(context is Context, id is Id, definition is map)
     precondition
     {
         annotation { "Name" : "Motor body width" }
         isLength(definition.motorWidth, MOTOR_WIDTH_BOUNDS);
-
-        annotation { "Name" : "Motor body height" }
-        isLength(definition.motorHeight, MOTOR_HEIGHT_BOUNDS);
 
         annotation { "Name" : "Holder length" }
         isLength(definition.holderLength, HOLDER_LENGTH_BOUNDS);
@@ -59,6 +56,9 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
 
         annotation { "Name" : "Fit clearance" }
         isLength(definition.clearance, CLEARANCE_BOUNDS);
+
+        annotation { "Name" : "Holder height" }
+        isLength(definition.holderHeight, HOLDER_HEIGHT_BOUNDS);
     }
     {
         const innerWidth = definition.motorWidth + 2 * definition.clearance;
@@ -66,65 +66,40 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
         const halfOuter = outerWidth / 2;
         const halfInner = innerWidth / 2;
         const halfLength = definition.holderLength / 2;
+        const baseThickness = 3 * millimeter;
 
-        // Base
-        var baseSketch = newSketch(context, id + "baseSketch", {
+        var holderSketch = newSketch(context, id + "holderSketch", {
                 "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
         });
 
-        skRectangle(baseSketch, "base", {
-                "firstCorner" : vector(-halfOuter, -halfLength),
-                "secondCorner" : vector(halfOuter, halfLength)
+        // Single closed U-shaped profile in top view:
+        // full base strip plus two side rails, all as one connected region.
+        skPolyline(holderSketch, "uProfile", {
+                "points" : [
+                    vector(-halfOuter, -halfLength),
+                    vector( halfOuter, -halfLength),
+                    vector( halfOuter,  halfLength),
+                    vector( halfInner,  halfLength),
+                    vector( halfInner, -halfLength + baseThickness),
+                    vector(-halfInner, -halfLength + baseThickness),
+                    vector(-halfInner,  halfLength),
+                    vector(-halfOuter,  halfLength),
+                    vector(-halfOuter, -halfLength)
+                ]
         });
 
-        skSolve(baseSketch);
+        skSolve(holderSketch);
 
-        extrude(context, id + "baseExtrude", {
-                "entities" : qSketchRegion(id + "baseSketch"),
+        extrude(context, id + "holderExtrude", {
+                "entities" : qSketchRegion(id + "holderSketch"),
                 "endBound" : BoundingType.BLIND,
-                "depth" : 3 * millimeter
-        });
-
-        // Left wall as independent body
-        var leftSketch = newSketch(context, id + "leftSketch", {
-                "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
-        });
-
-        skRectangle(leftSketch, "leftRail", {
-                "firstCorner" : vector(-halfOuter, -halfLength),
-                "secondCorner" : vector(-halfInner, halfLength)
-        });
-
-        skSolve(leftSketch);
-
-        extrude(context, id + "leftExtrude", {
-                "entities" : qSketchRegion(id + "leftSketch"),
-                "endBound" : BoundingType.BLIND,
-                "depth" : definition.motorHeight + definition.wallThickness
-        });
-
-        // Right wall as independent body
-        var rightSketch = newSketch(context, id + "rightSketch", {
-                "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
-        });
-
-        skRectangle(rightSketch, "rightRail", {
-                "firstCorner" : vector(halfInner, -halfLength),
-                "secondCorner" : vector(halfOuter, halfLength)
-        });
-
-        skSolve(rightSketch);
-
-        extrude(context, id + "rightExtrude", {
-                "entities" : qSketchRegion(id + "rightSketch"),
-                "endBound" : BoundingType.BLIND,
-                "depth" : definition.motorHeight + definition.wallThickness
+                "depth" : definition.holderHeight
         });
     },
     {
         "motorWidth" : 12 * millimeter,
-        "motorHeight" : 10 * millimeter,
         "holderLength" : 22 * millimeter,
         "wallThickness" : 2.5 * millimeter,
-        "clearance" : 0.4 * millimeter
+        "clearance" : 0.4 * millimeter,
+        "holderHeight" : 13 * millimeter
     });
