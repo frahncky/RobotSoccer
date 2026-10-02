@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<defs>
+  <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#e8edf2"/>
+    <stop offset="1" stop-color="#9aa7b3"/>
+  </linearGradient>
+  <linearGradient id="top" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2f3b46"/>
+    <stop offset="1" stop-color="#111820"/>
+  </linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="20" stdDeviation="20" flood-opacity="0.25"/>
+  </filter>
+</defs>
+<rect width="1200" height="800" fill="#f4f6f8"/>
+<ellipse cx="600" cy="660" rx="390" ry="55" fill="#000" opacity="0.12"/>
+<g filter="url(#shadow)">
+  <polygon points="600,150 865,300 815,550 600,680 385,550 335,300" fill="url(#body)" stroke="#596773" stroke-width="8"/>
+  <polygon points="600,185 820,310 780,515 600,620 420,515 380,310" fill="url(#top)" stroke="#5f6b75" stroke-width="5"/>
+  <rect x="515" y="290" width="170" height="150" rx="18" fill="#c8d1d8" stroke="#74828d" stroke-width="5"/>
+  <rect x="545" y="315" width="110" height="45" rx="8" fill="#3b82f6"/>
+  <circle cx="570" cy="395" r="13" fill="#22c55e"/>
+  <circle cx="610" cy="395" r="13" fill="#f59e0b"/>
+  <circle cx="650" cy="395" r="13" fill="#ef4444"/>
+  <path d="M500 510 L700 510 L750 600 L450 600 Z" fill="#d7dde2" stroke="#596773" stroke-width="6"/>
+  <rect x="560" y="500" width="80" height="110" rx="10" fill="#6b7280" stroke="#374151" stroke-width="5"/>
+  <rect x="580" y="565" width="40" height="90" rx="8" fill="#d1d5db" stroke="#4b5563" stroke-width="4"/>
+  <circle cx="600" cy="685" r="52" fill="#f5f5f5" stroke="#b8b8b8" stroke-width="5"/>
+  <path d="M570 665 L600 645 L630 665 L620 700 L580 700 Z" fill="#111827"/>
+  <g transform="translate(330 340) rotate(-18)">
+    <rect x="-38" y="-82" width="76" height="164" rx="30" fill="#20262c"/>
+    <g fill="#9ca3af">
+      <rect x="-50" y="-66" width="100" height="20" rx="10"/>
+      <rect x="-50" y="-25" width="100" height="20" rx="10"/>
+      <rect x="-50" y="16" width="100" height="20" rx="10"/>
+      <rect x="-50" y="57" width="100" height="20" rx="10"/>
+    </g>
+  </g>
+  <g transform="translate(870 340) rotate(18)">
+    <rect x="-38" y="-82" width="76" height="164" rx="30" fill="#20262c"/>
+    <g fill="#9ca3af">
+      <rect x="-50" y="-66" width="100" height="20" rx="10"/>
+      <rect x="-50" y="-25" width="100" height="20" rx="10"/>
+      <rect x="-50" y="16" width="100" height="20" rx="10"/>
+      <rect x="-50" y="57" width="100" height="20" rx="10"/>
+    </g>
+  </g>
+  <g transform="translate(600 665) rotate(90)">
+    <rect x="-38" y="-82" width="76" height="164" rx="30" fill="#20262c"/>
+    <g fill="#9ca3af">
+      <rect x="-50" y="-66" width="100" height="20" rx="10"/>
+      <rect x="-50" y="-25" width="100" height="20" rx="10"/>
+      <rect x="-50" y="16" width="100" height="20" rx="10"/>
+      <rect x="-50" y="57" width="100" height="20" rx="10"/>
+    </g>
+  </g>
+</g>
+<text x="600" y="85" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#1f2937">RobotSoccer — Chassi Hexagonal 3×120°</text>
+<text x="600" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#4b5563">3 motores N20 • 3 rodas omni • chute frontal central</text>
+</svg>
