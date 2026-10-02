@@ -1,0 +1,23 @@
+# KiCad generated backup files
+*-backups/
+*.bak
+*.bck
+*.kicad_prl
+*.kicad_sch-bak
+*.kicad_pcb-bak
+
+# Auto-save files
+_autosave-*
+*.tmp
+
+# Lock files
+~$*
+*.lck
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
