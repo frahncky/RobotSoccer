@@ -67,48 +67,37 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
         const halfInner = innerWidth / 2;
         const halfLength = definition.holderLength / 2;
 
-        // Base plate + two side walls form a printable U-shaped cradle.
-        var holderSketch = newSketch(context, id + "holderSketch", {
+        // Base footprint only. Avoid overlapping sketch regions.
+        var baseSketch = newSketch(context, id + "baseSketch", {
                 "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
         });
 
-        // Base footprint
-        skRectangle(holderSketch, "base", {
+        skRectangle(baseSketch, "base", {
                 "firstCorner" : vector(-halfOuter, -halfLength),
                 "secondCorner" : vector(halfOuter, halfLength)
         });
 
-        // Side rails
-        skRectangle(holderSketch, "leftRail", {
-                "firstCorner" : vector(-halfOuter, -halfLength),
-                "secondCorner" : vector(-halfInner, halfLength)
-        });
+        skSolve(baseSketch);
 
-        skRectangle(holderSketch, "rightRail", {
-                "firstCorner" : vector(halfInner, -halfLength),
-                "secondCorner" : vector(halfOuter, halfLength)
-        });
-
-        skSolve(holderSketch);
-
-        // Base: 3 mm.
         extrude(context, id + "baseExtrude", {
-                "entities" : qSketchRegion(id + "holderSketch"),
+                "entities" : qSketchRegion(id + "baseSketch"),
                 "endBound" : BoundingType.BLIND,
                 "depth" : 3 * millimeter
         });
 
-        // Side rails extend above the base to retain the N20 body.
+        const baseBody = qCreatedBy(id + "baseExtrude", EntityType.BODY);
+
+        // Two side walls create a U-shaped cradle for the motor.
         var railsSketch = newSketch(context, id + "railsSketch", {
                 "sketchPlane" : qCreatedBy(makeId("Top"), EntityType.FACE)
         });
 
-        skRectangle(railsSketch, "leftRailOnly", {
+        skRectangle(railsSketch, "leftRail", {
                 "firstCorner" : vector(-halfOuter, -halfLength),
                 "secondCorner" : vector(-halfInner, halfLength)
         });
 
-        skRectangle(railsSketch, "rightRailOnly", {
+        skRectangle(railsSketch, "rightRail", {
                 "firstCorner" : vector(halfInner, -halfLength),
                 "secondCorner" : vector(halfOuter, halfLength)
         });
@@ -121,11 +110,12 @@ export const robotSoccerN20Holder = defineFeature(function(context is Context, i
                 "depth" : definition.motorHeight + definition.wallThickness,
                 "operationType" : NewBodyOperationType.ADD,
                 "defaultScope" : false,
-                "booleanScope" : qCreatedBy(id + "baseExtrude", EntityType.BODY)
+                "booleanScope" : baseBody
         });
 
+        // Rename the resulting joined body using the original base query.
         setProperty(context, {
-                "entities" : qCreatedBy(id + "railsExtrude", EntityType.BODY),
+                "entities" : baseBody,
                 "propertyType" : PropertyType.NAME,
                 "value" : "Suporte_Motor_N20_RobotSoccer"
         });
