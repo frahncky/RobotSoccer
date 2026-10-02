@@ -1,6 +1,6 @@
 # RobotSoccer
 
-![Visão 3D do RobotSoccer](docs/RobotSoccer_3D.jpg)
+![Visão 3D do RobotSoccer](docs/RobotSoccer_3D.svg)
 
 Projeto de um robô de futebol omnidirecional com chassi hexagonal, três motores N20 e três rodas omni distribuídas a 120°, mecanismo frontal de chute e peças projetadas para fabricação em PLA.
 
